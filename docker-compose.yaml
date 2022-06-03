@@ -1,0 +1,51 @@
+version: "3"
+
+services:
+  cpe_app:
+    build:
+      context: ./build
+      dockerfile: Dockerfile.nginx
+    container_name: cpe_app
+    restart: always
+    ports:
+      - "8888:80"
+    volumes:
+      - ./src:/var/www/html:delegated
+    depends_on:
+      - cpe_php
+      - cpe_db
+
+  cpe_php:
+    build:
+      context: ./build
+      dockerfile: Dockerfile.php
+    container_name: cpe_php
+    restart: always
+    volumes:
+      - ./src:/var/www/html:delegated
+    expose:
+      - "9000"
+
+  cpe_db:
+    image: mariadb:10.5.8
+    container_name: cpe_database
+    restart: always
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+      - ./database/cpe.sql:/docker-entrypoint-initdb.d/dump.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${ROOT_PASSWORD}
+      MYSQL_DATABASE: cpekmutt
+    expose:
+      - "3306"
+
+  cpe_pma:
+    depends_on:
+      - cpe_db
+    image: phpmyadmin/phpmyadmin
+    container_name: cpe_pma
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: cpe_db
