@@ -18,7 +18,7 @@
                             {{ __('New Request') }}
                         </x-jet-nav-link>
                         <x-jet-nav-link href="{{ route('myrequest') }}" :active="request()->routeIs('myrequest')">
-                            {{ __('My Request') }}
+                            {{ __('My Group Request') }}
                         </x-jet-nav-link>
                     @endif
                     @if (auth()->user()->role)
@@ -164,9 +164,20 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('New Request') }}
-            </x-jet-responsive-nav-link>
+
+            @if (!auth()->user()->role)
+                <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    {{ __('New Request') }}
+                </x-jet-responsive-nav-link>
+                <x-jet-responsive-nav-link href="{{ route('myrequest') }}" :active="request()->routeIs('myrequest')">
+                    {{ __('My Group Request') }}
+                </x-jet-responsive-nav-link>
+            @endif
+            @if (auth()->user()->role)
+                <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    {{ __('Review') }}
+                </x-jet-responsive-nav-link>
+            @endif
 
         </div>
 

@@ -37,20 +37,20 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Attach file</label>
-                                                <input type="file" name="report_file" class="form-control"
+                                                <input required type="file" name="report_file" class="form-control"
                                                     accept="application/pdf">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Description or Comment</label>
-                                                <textarea name="description" class="form-control" rows="2"></textarea>
+                                                <textarea required name="description" class="form-control" rows="2"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-10">
                                             <div class="form-group">
                                                 <label>Request to</label>
-                                                <select class="form-control" name="request_to">
+                                                <select required class="form-control" name="request_to">
                                                     <option value="{{ $advisor->id }}">{{ $advisor->name }}
                                                         ( Advisor )</option>
                                                     <option value="{{ $committee1->id }}">{{ $committee1->name }}

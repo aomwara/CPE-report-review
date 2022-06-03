@@ -54,6 +54,14 @@
         <main>
             {{ $slot }}
         </main>
+        <footer class="bg-light text-center text-lg-start">
+            <!-- Copyright -->
+            <div class="text-center p-3" style="background-color: rgba(168, 168, 168, 0.2);">
+                Powered by <code>Mimic Finance </code>Co, Ltd.<br />
+                <small>Donate here 0xCfc597a8793E0ca94FC8310482D9e11367cfCA24</small>
+            </div>
+            <!-- Copyright -->
+        </footer>
     </div>
 
     @stack('modals')

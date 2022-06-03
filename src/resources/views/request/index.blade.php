@@ -2,7 +2,7 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             <h1 class="text-xl">
-                <font color="#242775">{{ env('APP_NAME') }}</font> | My Request
+                <font color="#242775">{{ env('APP_NAME') }}</font> | My Group Request
             </h1>
             {{ env('APP_DESC') }}
         </h2>
@@ -13,7 +13,9 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div style="padding:40px 40px 20px 40px;">
                     <h1 class="text-xl" style="padding-bottom: 20px;">
-                        <font color="#242775"> My Request</font>
+                        <font color="#242775"> Group {{ auth()->user()->project_group }}</font><br />
+                        <small> {{ App\Models\Groups::getName(auth()->user()->project_group) }}</small>
+
                     </h1>
 
                     <div class="row">
@@ -42,14 +44,15 @@
                                             style="color:#000; text-decoration:none;">
                                             <p class="card-text" style="cursor: pointer;">
                                                 <small>
-                                                    <b>Request to:</b> {{ $request->name }}<br />
-                                                    <b>Report file:</b> {{ $request->request_file }}<br />
-                                                    <b>Created at:</b> {{ $request->created_at }}<br />
-                                                    <b>Updated at:</b> {{ $request->updated_at }}<br />
+                                                    <b>By:</b>
+                                                    {{ App\Models\User::getName($request->request_by) }}<br />
+                                                    <b>To:</b> {{ $request->name }}<br />
+                                                    <b>Update Time:</b> {{ $request->updated_at }}<br />
                                                 </small>
                                             </p>
                                         </a>
                                     </div>
+
                                 </div>
                             </div>
                         @endforeach

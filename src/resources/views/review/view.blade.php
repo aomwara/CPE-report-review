@@ -59,7 +59,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-12">
+                            <div class="@if (!$history_count) col-md-12 @else col-md-7 @endif">
                                 <div class="form-group">
                                     <label><b>Student description / comment</b></label>
                                     @if ($request->description)
@@ -74,9 +74,44 @@
 
                                 </div>
                             </div>
+
+                            <div class="col-md-5" @if (!$history_count) hidden @endif>
+                                <label><b>History Comment</b></label>
+                                <div id="accordion">
+                                    <div class="card">
+                                        <div class="card-header" id="headingOne">
+                                            <h5 class="mb-0">
+                                                <button type="button" class="btn btn-outline-secondary btn-block"
+                                                    data-toggle="collapse" data-target="#collapseOne"
+                                                    aria-controls="collapseOne">
+                                                    View history
+                                                </button>
+                                            </h5>
+                                        </div>
+
+                                        <div id="collapseOne" class="collapse" aria-expanded="false"
+                                            aria-labelledby="headingOne" data-parent="#accordion">
+                                            <div class="card-body "
+                                                style="overflow-y: auto; height:@if ($history_count < 2) 150px @else 200px @endif;">
+                                                @foreach ($history_review as $review)
+                                                    <div class="card" style="padding:10px; margin-top:10px;">
+                                                        @php echo $review->review @endphp
+                                                        <div style="padding-top:3px; text-align:right; color:#999;">
+                                                            <small> By
+                                                                {{ App\Models\User::getName($review->request_to) }} |
+                                                                {{ $review->updated_at }}</small>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-12">
                                 <hr>
                             </div>
+
                             <div class="col-md-7">
                                 <label><b>File</b></label>
                                 <div class="form-group">
@@ -126,6 +161,9 @@
     </div>
 
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>

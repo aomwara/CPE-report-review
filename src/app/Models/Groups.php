@@ -18,4 +18,9 @@ class Groups extends Model
         $group = Groups::where('id', $id)->first();
         return "[".$id."]"." ".$group->project_name;
     }
+
+    public static function getName($id){
+        $group = Groups::where('id', $id)->first();
+        return $group->project_name;
+    }
 }

@@ -30,6 +30,7 @@ class GroupsController extends Controller
    public function myRequest () {
        $myrequest = Requests::leftjoin('users as u', 'requests.request_to', '=', 'u.id')
        ->where('request_by', auth()->user()->id)
+       ->orWhere('requests.project_group', auth()->user()->project_group)
        ->orderby('requests.id', 'desc')
        ->select('requests.*', 'u.id as uid', 'u.name as name')
        ->get();
@@ -71,12 +72,23 @@ class GroupsController extends Controller
                 ->select('requests.*', 'u.id as uid', 'u.name as name')
                 ->first();
 
+            $history_review = Requests::where('project_group', $request->project_group)
+                ->where('review', '!=' , null)
+                ->orderby('id', 'desc')
+                ->get();
+            $history_count = Requests::where('project_group', $request->project_group)
+                ->where('review', '!=' , null)
+                ->orderby('id', 'desc')
+                ->count();
+
             $group = Groups::where('id', $request->project_group)->first();
             $members = User::where('project_group', $request->project_group)->get();
         return view('review/view',[
             'request' => $request,
             'mygroup' => $group,
-            'members' => $members
+            'members' => $members,
+            'history_review' => $history_review,
+            'history_count' => $history_count,
         ]);
         }else{
             return redirect('/admin/dashboard');
