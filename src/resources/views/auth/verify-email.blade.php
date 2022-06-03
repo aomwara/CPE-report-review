@@ -1,7 +1,10 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+            <center>
+                <img src="/images/logo.png" width="150px" alt="">
+                <h2 style="margin-top:20px;" class="text-xl">{{ env('APP_NAME') }}</h2>
+            </center>
         </x-slot>
 
         <div class="mb-4 text-sm text-gray-600">

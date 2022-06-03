@@ -1,7 +1,10 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+            <center>
+                <img src="/images/logo.png" width="150px" alt="">
+                <h2 style="margin-top:20px;" class="text-xl">{{ env('APP_NAME') }}</h2>
+            </center>
         </x-slot>
 
         <div class="mb-4 text-sm text-gray-600">
@@ -15,7 +18,8 @@
 
             <div>
                 <x-jet-label for="password" value="{{ __('Password') }}" />
-                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" autofocus />
+                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required
+                    autocomplete="current-password" autofocus />
             </div>
 
             <div class="flex justify-end mt-4">
