@@ -78,7 +78,11 @@
             </a>
             <a style="margin-left:20px;" href="/register">
                 Register
+            </a><br />
+            <a style=" width:225px; " href="https://discord.gg/Rm2VnWpY" target="_blank">
+                Join Discord Server
             </a>
+
         </div>
     </div>
 </body>
